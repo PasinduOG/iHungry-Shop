@@ -20,20 +20,21 @@ A console-based Java application for managing burger orders in a restaurant. Thi
 
 ### Order Management
 - **Place New Orders**: Add customer orders with automatic order ID generation
-- **Search Orders**: Find specific orders by Order ID
+- **Search Orders**: Find specific orders by Order ID with enhanced validation
 - **Update Orders**: Modify quantity and status of existing orders
 - **View Orders**: Filter orders by status (Preparing, Delivered, Cancelled)
 
 ### Customer Management
 - **Customer Registration**: Automatically register new customers
-- **Customer Search**: Find customer details and order history
+- **Customer Search**: Find customer details and order history with validation
 - **Best Customer Analysis**: Identify top customers by total purchase value
 
 ### System Features
 - **Automatic Order ID Generation**: Sequential burger order IDs (B0001, B0002, etc.)
-- **Input Validation**: Comprehensive validation for phone numbers and order IDs
+- **Enhanced Input Validation**: Comprehensive validation for phone numbers and order IDs across all functions
 - **Dynamic Data Storage**: Arrays that automatically expand as needed
 - **Cross-platform Console Clearing**: Works on Windows and Unix-based systems
+- **Error Prevention**: Robust validation prevents invalid data entry
 
 ## 💻 System Requirements
 
@@ -83,9 +84,9 @@ Simply enter the number corresponding to your desired action and follow the prom
 iHungry-Shop/
 │
 ├── IHungry.java       # Main source code file
-├── IHungry.class      # Compiled Java class file
+├── IHungry.class      # Compiled Java class file  
 ├── README.md          # Project documentation
-├── .gitignore         # Git ignore file
+├── .gitignore         # Git ignore file (excludes .class files)
 └── .git/              # Git repository folder
 ```
 
@@ -104,9 +105,11 @@ iHungry-Shop/
 - Sorted in descending order of purchase value
 
 ### 3. Search Order
-- Find orders by Order ID
+- Find orders by Order ID with **enhanced input validation**
 - Display complete order details including status
+- **Improved error handling** - validates order ID format before search
 - Validate order ID format (B + 4 digits)
+- Retry mechanism for invalid inputs
 
 ### 4. Search Customer
 - Search by customer phone number
@@ -150,11 +153,14 @@ Arrays automatically expand when new orders are placed using the `extendArray()`
 - Must be exactly 10 digits
 - Must start with '0'
 - Must contain only numeric characters
+- **Applied in**: Place Order, Search Customer, Update Order Details
 
 ### Order ID
 - Must be exactly 5 characters
 - Must start with 'B' or 'b'
 - Last 4 characters must be numeric
+- **Applied in**: Search Order, Update Order Details
+- **Enhanced validation**: Prevents invalid searches and updates
 
 ## 📋 Sample Data
 
@@ -181,10 +187,20 @@ public static final int CANCELLED = 2;    // Order status: Cancelled
 ## 🎨 Features Highlights
 
 - **User-Friendly Interface**: Clear menu options and prompts
-- **Error Handling**: Comprehensive input validation and error messages
+- **Enhanced Error Handling**: Comprehensive input validation and error messages with retry mechanisms  
 - **Data Persistence**: Maintains data throughout the session
 - **Flexible Updates**: Allow modifications only for appropriate order states
 - **Reporting**: Customer analysis and order filtering capabilities
+- **Robust Input Validation**: Prevents invalid data entry across all system functions
+- **Improved User Experience**: Better error messages and validation feedback
+
+## 📝 Recent Updates
+
+### Version Improvements
+- **Enhanced Order Search**: Added input validation for Order ID in search functionality
+- **Better Error Prevention**: Order search now validates ID format before attempting search
+- **Improved Code Quality**: Added .gitignore file to exclude compiled class files from version control
+- **Consistent Validation**: Standardized validation patterns across all input functions
 
 ## 🤝 Contributing
 

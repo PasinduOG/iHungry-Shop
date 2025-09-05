@@ -346,6 +346,11 @@ class IHungry{
 			
 			System.out.print("Enter order Id - ");
 			String orderId=input.next();
+			while(!isValidOrderId(orderId)){
+				System.out.println("\tInvalid Order ID...Please try again...\n");
+				System.out.print("Enter order Id - ");
+				orderId=input.next();
+			}
 			
 			boolean haveDetails=false;
 			for(int i=0; i<orderIdArray.length; i++){
