@@ -660,8 +660,17 @@ class IHungry{
 					System.out.printf("CustomerID    - %s\n",customerIdArray[i]);
 					System.out.printf("Name          - %s\n\n",nameArray[i]);
 					
-					System.out.print("Enter your quantity update value - ");
-					qtyArray[i]=input.nextInt();
+					L2:while(true){
+						System.out.print("Enter your quantity update value - ");
+						int qty=input.nextInt();
+						if(qty>0){
+							qtyArray[i]=qty;
+							break L2;
+						}else{
+							System.out.println("\tInvalid quantity input...Please try again...\n");
+							continue L2;
+						}
+					}
 					
 					System.out.println("\n\tUpdate order quantity successfully...\n");
 					
@@ -669,7 +678,7 @@ class IHungry{
 					System.out.printf("New order value - %.2f\n\n",qtyArray[i]*BURGERPRICE);
 				}
 			}
-			L2:do{
+			L3:do{
 				System.out.print("Do you want to update another order details (Y/N): ");
 				String retry=input.next().toLowerCase();
 				if(retry.equals("y")){
@@ -678,7 +687,7 @@ class IHungry{
 					mainMenu();
 				}else{
 					System.out.print("Wrong option");
-					continue L2;
+					continue L3;
 				}
 			}while(true);
 		}while(true);
