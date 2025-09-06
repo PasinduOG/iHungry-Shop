@@ -31,10 +31,11 @@ A console-based Java application for managing burger orders in a restaurant. Thi
 
 ### System Features
 - **Automatic Order ID Generation**: Sequential burger order IDs (B0001, B0002, etc.)
-- **Enhanced Input Validation**: Comprehensive validation for phone numbers and order IDs across all functions
+- **Enhanced Input Validation**: Comprehensive validation for phone numbers, order IDs, and quantities
 - **Dynamic Data Storage**: Arrays that automatically expand as needed
 - **Cross-platform Console Clearing**: Works on Windows and Unix-based systems
 - **Error Prevention**: Robust validation prevents invalid data entry
+- **Clean Architecture**: Streamlined code with improved maintainability
 
 ## 💻 System Requirements
 
@@ -122,22 +123,26 @@ iHungry-Shop/
 - **Cancelled Orders**: View cancelled orders
 
 ### 6. Update Order Details
-- Modify order quantity for non-delivered orders
+- Modify order quantity for non-delivered orders with **quantity validation**
 - Change order status (Preparing → Delivered → Cancelled)
 - Prevent updates to delivered/cancelled orders
+- **Enhanced validation**: Ensures only positive quantities are accepted
 
 ## 💾 Data Management
 
 The system uses in-memory arrays to store data:
 
-- **Order IDs**: Automatically generated sequential IDs
+- **Order IDs**: Automatically generated sequential IDs starting from B0001
 - **Customer IDs**: 10-digit phone numbers
 - **Customer Names**: String array for customer names
-- **Order Quantities**: Integer array for burger quantities
+- **Order Quantities**: Integer array for burger quantities (with positive validation)
 - **Order Status**: Integer codes (0=Preparing, 1=Delivered, 2=Cancelled)
 
 ### Dynamic Array Management
-Arrays automatically expand when new orders are placed using the `extendArray()` method.
+- **Initial State**: All arrays start empty for a fresh system experience
+- **Runtime Population**: Data is added as users interact with the system
+- **Automatic Expansion**: Arrays automatically expand when new orders are placed using the `extendArray()` method
+- **Clean Start**: Each program execution begins with no pre-existing data
 
 ## 📊 Order Status
 
@@ -162,16 +167,19 @@ Arrays automatically expand when new orders are placed using the `extendArray()`
 - **Applied in**: Search Order, Update Order Details
 - **Enhanced validation**: Prevents invalid searches and updates
 
-## 📋 Sample Data
+### Quantity Validation
+- Must be a positive integer (greater than 0)
+- **Applied in**: Update Order Quantity
+- **Prevents**: Zero or negative quantity values
 
-The system comes pre-loaded with sample data:
+## 📋 Data Storage
 
-| Order ID | Customer ID | Name | Quantity | Status |
-|----------|-------------|------|----------|--------|
-| B0001 | 0702436642 | Pasindu | 2 | Preparing |
-| B0002 | 0715518744 | Sawen | 3 | Delivered |
-| B0003 | 0702436642 | Pasindu | 7 | Cancelled |
-| B0004 | 0702345678 | Ravindu | 5 | Delivered |
+The system uses empty arrays that dynamically populate as users add data:
+
+- **Initial State**: All arrays start empty for a fresh system experience
+- **Dynamic Growth**: Arrays automatically expand when new orders are placed
+- **Runtime Data**: All customer and order information is entered during program execution
+- **Fresh Start**: Each program run begins with a clean slate
 
 **Burger Price**: Rs. 500.00 per burger
 
@@ -193,10 +201,19 @@ public static final int CANCELLED = 2;    // Order status: Cancelled
 - **Reporting**: Customer analysis and order filtering capabilities
 - **Robust Input Validation**: Prevents invalid data entry across all system functions
 - **Improved User Experience**: Better error messages and validation feedback
+- **Clean System Design**: Starts fresh with no pre-loaded data, building organically
+- **Production Ready**: Suitable for real-world deployment with proper data validation
 
 ## 📝 Recent Updates
 
-### Version Improvements
+### Version Improvements (Latest)
+- **Clean Architecture**: Removed sample data for a fresh system experience
+- **Enhanced Quantity Validation**: Added positive number validation for order quantity updates
+- **Code Optimization**: Cleaned up inline comments and improved code readability
+- **Production Ready**: System now starts with empty arrays, ready for real-world use
+- **Better User Experience**: More intuitive system that builds data organically
+
+### Previous Updates
 - **Enhanced Order Search**: Added input validation for Order ID in search functionality
 - **Better Error Prevention**: Order search now validates ID format before attempting search
 - **Improved Code Quality**: Added .gitignore file to exclude compiled class files from version control

@@ -6,12 +6,12 @@ class IHungry{
 	public static final int DELIVERED=1;
 	public static final int CANCELLLED=2;
 	
-	public static String[] orderIdArray=new String[]{"B0001","B0002","B0003","B0004"};
+	public static String[] orderIdArray=new String[]{};
 	public static int orderCount=orderIdArray.length;
-	public static String[] customerIdArray=new String[]{"0702436642","0715518744","0702436642","0702345678"};
-	public static String[] nameArray=new String[]{"Pasindu","Sawen","Pasindu","Ravindu"};
-	public static int[] qtyArray=new int[]{2,3,7,5};
-	public static int[] orderStatusArray={0,1,2,1};
+	public static String[] customerIdArray=new String[]{};
+	public static String[] nameArray=new String[]{};
+	public static int[] qtyArray=new int[]{};
+	public static int[] orderStatusArray={};
 	
 	public static String generateOrderId(){
 		int nextId=orderCount+1;
@@ -208,16 +208,14 @@ class IHungry{
 				extendArray();
 				
 				orderStatusArray[orderStatusArray.length-1]=PREPARING;
-				orderIdArray[orderIdArray.length-1]=newOrderId; //add new order id to extended index
-				customerIdArray[customerIdArray.length-1]=customerId; //add new customer id to extended index
+				orderIdArray[orderIdArray.length-1]=newOrderId;
+				customerIdArray[customerIdArray.length-1]=customerId;
 				if(index.equals("")){
-					nameArray[nameArray.length-1]=customerName; //add new user name to extended index
+					nameArray[nameArray.length-1]=customerName;
 				}else{
-					nameArray[nameArray.length-1]=index; //add existing user name to extended index
+					nameArray[nameArray.length-1]=index;
 				}
-				qtyArray[qtyArray.length-1]=qty; //add quantity of orders to extended index
-				
-				
+				qtyArray[qtyArray.length-1]=qty;
 				System.out.println("\n\tYour order is entered to the system successfully...");
 				L2:do{
 					System.out.print("\nDo you want to place another order (Y/N): ");
@@ -262,9 +260,9 @@ class IHungry{
 			System.out.printf("%-12s %-15s %7s\n","CustomerID","Name","Total");
 			System.out.println("--------------------------------------");
 			
-			String[] bestCustIdArr=new String[0]; //Duplicate removed array
-			String[] bestCustNameArr=new String[0]; //Duplicate removed array
-			double[] bestCustTotalArr=new double[qtyArray.length]; //Duplicate removed array
+			String[] bestCustIdArr=new String[0];
+			String[] bestCustNameArr=new String[0];
+			double[] bestCustTotalArr=new double[qtyArray.length];
 			
 			for(int i=0; i<customerIdArray.length; i++){
 				if(!searchId(bestCustIdArr,customerIdArray[i])){
