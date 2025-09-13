@@ -2,16 +2,16 @@ import java.util.*;
 class IHungry{
 	
 	final static double BURGERPRICE=500;
-	public static final int PREPARING=0;
-	public static final int DELIVERED=1;
-	public static final int CANCELLLED=2;
+	public static final int CANCEL=0;
+	public static final int PREPARING=1;
+	public static final int DELIVERED=2;
 	
-	public static String[] orderIdArray=new String[]{};
-	public static int orderCount=orderIdArray.length;
-	public static String[] customerIdArray=new String[]{};
-	public static String[] nameArray=new String[]{};
-	public static int[] qtyArray=new int[]{};
-	public static int[] orderStatusArray={};
+	public static String[] orderIdArray=new String[0];
+	public static int orderCount=0;
+	public static String[] customerIdArray=new String[0];
+	public static String[] nameArray=new String[0];
+	public static int[] qtyArray=new int[0];
+	public static int[] orderStatusArray=new int[0];
 	
 	public static String generateOrderId(){
 		int nextId=orderCount+1;
@@ -33,7 +33,7 @@ class IHungry{
 			return "Preparing";
 		}else if(index==DELIVERED){
 			return "Delivered";
-		}else if(index==CANCELLLED){
+		}else if(index==CANCEL){
 			return "Cancelled";
 		}else{
 			return "";
@@ -152,7 +152,7 @@ class IHungry{
 	public static boolean isCancelledOrderId(String orderId){
 		for(int i=0; i<orderIdArray.length; i++){
 			if(orderId.equalsIgnoreCase(orderIdArray[i])){
-				if(orderStatusArray[i]==CANCELLLED){
+				if(orderStatusArray[i]==CANCEL){
 					return true;
 				}
 			}
@@ -161,7 +161,7 @@ class IHungry{
 	}
 	
 	public static boolean isOrderStatusId(int newOrderId){
-		if(newOrderId==PREPARING || newOrderId==DELIVERED || newOrderId==CANCELLLED){
+		if(newOrderId==PREPARING || newOrderId==DELIVERED || newOrderId==CANCEL){
 			return true;
 		}
 		return false;
@@ -201,50 +201,53 @@ class IHungry{
 			double total=(double)BURGERPRICE*qty;
 			System.out.printf("Total Value                   - %.2f\n",total);
 			
-			System.out.print("\tAre you confirm order - ");
-			String confirm=input.next().toLowerCase();
-			if(confirm.equals("y")){
-				orderCount+=1;
-				extendArray();
-				
-				orderStatusArray[orderStatusArray.length-1]=PREPARING;
-				orderIdArray[orderIdArray.length-1]=newOrderId;
-				customerIdArray[customerIdArray.length-1]=customerId;
-				if(index.equals("")){
-					nameArray[nameArray.length-1]=customerName;
+			L2:do{
+				System.out.print("\tAre you confirm order - ");
+				String confirm=input.next().toLowerCase();
+				if(confirm.equals("y")){
+					orderCount++;
+					extendArray();
+					
+					orderStatusArray[orderStatusArray.length-1]=PREPARING;
+					orderIdArray[orderIdArray.length-1]=newOrderId;
+					customerIdArray[customerIdArray.length-1]=customerId;
+					if(index.equals("")){
+						nameArray[nameArray.length-1]=customerName;
+					}else{
+						nameArray[nameArray.length-1]=index;
+					}
+					qtyArray[qtyArray.length-1]=qty;
+					System.out.println("\n\tYour order is entered to the system successfully...");
+					L3:do{
+						System.out.print("\nDo you want to place another order (Y/N): ");
+						String addNewOrder=input.next().toLowerCase();
+						if(addNewOrder.equals("y")){
+							continue L1;
+						}else if(addNewOrder.equals("n")){
+							break L1;
+						}else{
+							System.out.println("\tWrong option\n");
+							continue L3;
+						}
+					}while(true);
+				}else if(confirm.equals("n")){
+					L4:do{
+						System.out.print("\nDo you want to retry: ");
+						String addNewOrder=input.next().toLowerCase();
+						if(addNewOrder.equals("y")){
+							continue L1;
+						}else if(addNewOrder.equals("n")){
+							break L1;
+						}else{
+							System.out.println("\tWrong option\n");
+							continue L4;
+						}
+					}while(true);
 				}else{
-					nameArray[nameArray.length-1]=index;
+					System.out.println("\t\tWrong option\n");
+					continue L2;
 				}
-				qtyArray[qtyArray.length-1]=qty;
-				System.out.println("\n\tYour order is entered to the system successfully...");
-				L2:do{
-					System.out.print("\nDo you want to place another order (Y/N): ");
-					String addNewOrder=input.next().toLowerCase();
-					if(addNewOrder.equals("y")){
-						continue L1;
-					}else if(addNewOrder.equals("n")){
-						break L1;
-					}else{
-						System.out.print("Wrong option");
-						continue L2;
-					}
-				}while(true);
-			}else if(confirm.equals("n")){
-				L3:do{
-					System.out.print("\nDo you want to retry: ");
-					String addNewOrder=input.next().toLowerCase();
-					if(addNewOrder.equals("y")){
-						continue L1;
-					}else if(addNewOrder.equals("n")){
-						break L1;
-					}else{
-						System.out.print("Wrong option");
-						continue L3;
-					}
-				}while(true);
-			}else{
-				continue L1;
-			}
+			}while(true);
 		}while(true);
 	}
 	
@@ -402,7 +405,7 @@ class IHungry{
 			String customerId=input.next();
 			while(!isValidCustomerId(customerId)){
 				System.out.println("\tInvalid phone number... Try again...!\n");
-				System.out.print("Enter Customer ID (phone no.) : ");
+				System.out.print("Enter Customer Id (phone no.) : ");
 				customerId=input.next();
 			}
 			
@@ -557,7 +560,7 @@ class IHungry{
 			System.out.printf(" %-10s %-16s %-13s %8s %13s |\n","OrderID", "CustomerID", "Name", "Quantity", "OrderValue");
 			System.out.println("-------------------------------------------------------------------");
 			for(int i=0; i<orderStatusArray.length; i++){
-				if(orderStatusArray[i]==CANCELLLED){
+				if(orderStatusArray[i]==CANCEL){
 					System.out.printf(" %-10s %-16s %-13s %5d %16.2f |\n",orderIdArray[i], customerIdArray[i], nameArray[i], qtyArray[i], qtyArray[i]*BURGERPRICE);
 					System.out.println("-------------------------------------------------------------------");
 				}
@@ -770,6 +773,10 @@ class IHungry{
 				case 6 :
 					updateOrderDetails();
 					break;
+				case 7 :
+					System.out.println("\n\tTHANK YOU FOR USING iHUNGRY BURGER");
+					System.out.println("\t\tHAVE A NICE DAY!!!");
+					break L1;
 				default :
 					System.out.println("\tInvalid option...");
 					System.out.print("Do you want to try again? (Y/N) : ");

@@ -22,7 +22,7 @@ A console-based Java application for managing burger orders in a restaurant. Thi
 - **Place New Orders**: Add customer orders with automatic order ID generation
 - **Search Orders**: Find specific orders by Order ID with enhanced validation
 - **Update Orders**: Modify quantity and status of existing orders
-- **View Orders**: Filter orders by status (Preparing, Delivered, Cancelled)
+- **View Orders**: Filter orders by status (Delivered, Preparing, Cancelled)
 
 ### Customer Management
 - **Customer Registration**: Automatically register new customers
@@ -36,6 +36,8 @@ A console-based Java application for managing burger orders in a restaurant. Thi
 - **Cross-platform Console Clearing**: Works on Windows and Unix-based systems
 - **Error Prevention**: Robust validation prevents invalid data entry
 - **Clean Architecture**: Streamlined code with improved maintainability
+- **Improved User Experience**: Better error messages and structured confirmation flows
+- **Graceful Exit**: Proper application termination with thank you message
 
 ## 💻 System Requirements
 
@@ -98,7 +100,9 @@ iHungry-Shop/
 - Validate customer phone number (10 digits starting with 0)
 - Handle new and returning customers
 - Calculate total order value
-- Confirm order before saving
+- **Enhanced confirmation flow** with retry options
+- **Improved error handling** for invalid confirmations
+- **Better user guidance** with clear option prompts
 
 ### 2. Search Best Customer
 - Display customers ranked by total purchase amount
@@ -124,7 +128,7 @@ iHungry-Shop/
 
 ### 6. Update Order Details
 - Modify order quantity for non-delivered orders with **quantity validation**
-- Change order status (Preparing → Delivered → Cancelled)
+- Change order status (Cancelled ← Preparing → Delivered)
 - Prevent updates to delivered/cancelled orders
 - **Enhanced validation**: Ensures only positive quantities are accepted
 
@@ -136,7 +140,7 @@ The system uses in-memory arrays to store data:
 - **Customer IDs**: 10-digit phone numbers
 - **Customer Names**: String array for customer names
 - **Order Quantities**: Integer array for burger quantities (with positive validation)
-- **Order Status**: Integer codes (0=Preparing, 1=Delivered, 2=Cancelled)
+- **Order Status**: Integer codes (0=Cancelled, 1=Preparing, 2=Delivered)
 
 ### Dynamic Array Management
 - **Initial State**: All arrays start empty for a fresh system experience
@@ -148,9 +152,9 @@ The system uses in-memory arrays to store data:
 
 | Status Code | Status Name | Description |
 |-------------|-------------|-------------|
-| 0 | Preparing | Order is being prepared |
-| 1 | Delivered | Order has been delivered |
-| 2 | Cancelled | Order has been cancelled |
+| 0 | Cancelled | Order has been cancelled |
+| 1 | Preparing | Order is being prepared |
+| 2 | Delivered | Order has been delivered |
 
 ## ✅ Validation Rules
 
@@ -187,9 +191,9 @@ The system uses empty arrays that dynamically populate as users add data:
 
 ```java
 final static double BURGERPRICE = 500;    // Price per burger
-public static final int PREPARING = 0;    // Order status: Preparing
-public static final int DELIVERED = 1;    // Order status: Delivered  
-public static final int CANCELLED = 2;    // Order status: Cancelled
+public static final int CANCEL = 0;       // Order status: Cancelled
+public static final int PREPARING = 1;    // Order status: Preparing
+public static final int DELIVERED = 2;    // Order status: Delivered
 ```
 
 ## 🎨 Features Highlights
@@ -206,18 +210,22 @@ public static final int CANCELLED = 2;    // Order status: Cancelled
 
 ## 📝 Recent Updates
 
-### Version Improvements (Latest)
+### Version Improvements (Latest - September 2025)
+- **Fixed Status Constants**: Corrected order status mapping (CANCEL=0, PREPARING=1, DELIVERED=2)
+- **Enhanced Place Order Flow**: Improved confirmation process with better error handling
+- **Proper Array Initialization**: Standardized empty array initialization syntax
+- **Better Exit Functionality**: Added graceful application termination with thank you message
+- **Improved User Experience**: Enhanced error messages and structured confirmation flows
+- **Code Consistency**: Fixed all status-related functions to use correct constants
+
+### Previous Updates
 - **Clean Architecture**: Removed sample data for a fresh system experience
 - **Enhanced Quantity Validation**: Added positive number validation for order quantity updates
 - **Code Optimization**: Cleaned up inline comments and improved code readability
 - **Production Ready**: System now starts with empty arrays, ready for real-world use
-- **Better User Experience**: More intuitive system that builds data organically
-
-### Previous Updates
 - **Enhanced Order Search**: Added input validation for Order ID in search functionality
 - **Better Error Prevention**: Order search now validates ID format before attempting search
 - **Improved Code Quality**: Added .gitignore file to exclude compiled class files from version control
-- **Consistent Validation**: Standardized validation patterns across all input functions
 
 ## 🤝 Contributing
 
