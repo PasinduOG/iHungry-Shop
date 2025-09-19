@@ -106,6 +106,24 @@ class IHungry{
 		return true;
 	}
 	
+	public static boolean isHaveDeliveryDetails(int statusId){
+		for(int i=0; i<orderStatusArray.length; i++){
+			if(orderStatusArray[i]==statusId){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isHaveOrderDetails(String orderId){
+		for(int i=0; i<orderIdArray.length; i++){
+			if(orderIdArray[i].equalsIgnoreCase(orderId)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static void extendArray(){
 		String[] tempOrderId=new String[orderIdArray.length+1];
 		for(int i=0; i<orderIdArray.length; i++){
@@ -259,67 +277,71 @@ class IHungry{
 			System.out.println("|                       BEST Customer                       |");
 			System.out.println("-------------------------------------------------------------\n\n");
 			
-			System.out.println("--------------------------------------");
-			System.out.printf("%-12s %-15s %7s\n","CustomerID","Name","Total");
-			System.out.println("--------------------------------------");
-			
-			String[] bestCustIdArr=new String[0];
-			String[] bestCustNameArr=new String[0];
-			double[] bestCustTotalArr=new double[qtyArray.length];
-			
-			for(int i=0; i<customerIdArray.length; i++){
-				if(!searchId(bestCustIdArr,customerIdArray[i])){
-					String[] tempCustomerIdArr=new String[bestCustIdArr.length+1];
-					for(int j=0; j<bestCustIdArr.length; j++){
-						tempCustomerIdArr[j]=bestCustIdArr[j];
-					}
-					bestCustIdArr=tempCustomerIdArr;
-					bestCustIdArr[bestCustIdArr.length-1]=customerIdArray[i];
-				}
-			}
-			
-			for(int i=0; i<nameArray.length; i++){
-				if(!searchName(bestCustNameArr,nameArray[i])){
-					String[] tempCustomerNameArr=new String[bestCustNameArr.length+1];
-					for(int j=0; j<bestCustNameArr.length; j++){
-						tempCustomerNameArr[j]=bestCustNameArr[j];
-					}
-					bestCustNameArr=tempCustomerNameArr;
-					bestCustNameArr[bestCustNameArr.length-1]=nameArray[i];
-				}
-			}
-			
-			for(int i=0; i<bestCustIdArr.length; i++){
-				double total=0;
-				for(int j=0; j<customerIdArray.length; j++){
-					if(customerIdArray[j].equalsIgnoreCase(bestCustIdArr[i])){
-						total+=qtyArray[j]*BURGERPRICE;
-					}
-				}
-				bestCustTotalArr[i]=total;
-			}
-			
-			for(int i=0; i<bestCustTotalArr.length-1; i++){
-				for(int j=0; j<bestCustTotalArr.length-1; j++){
-					if(bestCustTotalArr[j]<bestCustTotalArr[j+1]){
-						String tempId=bestCustIdArr[j];
-						bestCustIdArr[j]=bestCustIdArr[j+1];
-						bestCustIdArr[j+1]=tempId;
-						
-						double tempTotal=bestCustTotalArr[j];
-						bestCustTotalArr[j]=bestCustTotalArr[j+1];
-						bestCustTotalArr[j+1]=tempTotal;
-						
-						String tempName=bestCustNameArr[j];
-						bestCustNameArr[j]=bestCustNameArr[j+1];
-						bestCustNameArr[j+1]=tempName;
-					}
-				}
-			}
-			
-			for(int i=0; i<bestCustIdArr.length; i++){
-				System.out.printf("%-12s %-15s %8.2f\n",bestCustIdArr[i],bestCustNameArr[i],bestCustTotalArr[i]);
+			if(orderIdArray.length!=0){
 				System.out.println("--------------------------------------");
+				System.out.printf("%-12s %-15s %7s\n","CustomerID","Name","Total");
+				System.out.println("--------------------------------------");
+				
+				String[] bestCustIdArr=new String[0];
+				String[] bestCustNameArr=new String[0];
+				double[] bestCustTotalArr=new double[qtyArray.length];
+				
+				for(int i=0; i<customerIdArray.length; i++){
+					if(!searchId(bestCustIdArr,customerIdArray[i])){
+						String[] tempCustomerIdArr=new String[bestCustIdArr.length+1];
+						for(int j=0; j<bestCustIdArr.length; j++){
+							tempCustomerIdArr[j]=bestCustIdArr[j];
+						}
+						bestCustIdArr=tempCustomerIdArr;
+						bestCustIdArr[bestCustIdArr.length-1]=customerIdArray[i];
+					}
+				}
+				
+				for(int i=0; i<nameArray.length; i++){
+					if(!searchName(bestCustNameArr,nameArray[i])){
+						String[] tempCustomerNameArr=new String[bestCustNameArr.length+1];
+						for(int j=0; j<bestCustNameArr.length; j++){
+							tempCustomerNameArr[j]=bestCustNameArr[j];
+						}
+						bestCustNameArr=tempCustomerNameArr;
+						bestCustNameArr[bestCustNameArr.length-1]=nameArray[i];
+					}
+				}
+			
+				for(int i=0; i<bestCustIdArr.length; i++){
+					double total=0;
+					for(int j=0; j<customerIdArray.length; j++){
+						if(customerIdArray[j].equalsIgnoreCase(bestCustIdArr[i])){
+							total+=qtyArray[j]*BURGERPRICE;
+						}
+					}
+					bestCustTotalArr[i]=total;
+				}
+			
+				for(int i=0; i<bestCustTotalArr.length-1; i++){
+					for(int j=0; j<bestCustTotalArr.length-1; j++){
+						if(bestCustTotalArr[j]<bestCustTotalArr[j+1]){
+							String tempId=bestCustIdArr[j];
+							bestCustIdArr[j]=bestCustIdArr[j+1];
+							bestCustIdArr[j+1]=tempId;
+							
+							double tempTotal=bestCustTotalArr[j];
+							bestCustTotalArr[j]=bestCustTotalArr[j+1];
+							bestCustTotalArr[j+1]=tempTotal;
+							
+							String tempName=bestCustNameArr[j];
+							bestCustNameArr[j]=bestCustNameArr[j+1];
+							bestCustNameArr[j+1]=tempName;
+						}
+					}
+				}
+			
+				for(int i=0; i<bestCustIdArr.length; i++){
+					System.out.printf("%-12s %-15s %8.2f\n",bestCustIdArr[i],bestCustNameArr[i],bestCustTotalArr[i]);
+					System.out.println("--------------------------------------");
+				}
+			}else{
+				System.out.println("No data found...\n");
 			}
 			
 			L2:do{
@@ -366,7 +388,7 @@ class IHungry{
 			}
 			if(!haveDetails){
 				L2:do{
-					System.out.print("\n\n\nInvalid Order ID. Do you want to enter again? (Y/N)> ");
+					System.out.print("\n\n\nNo order details found. Do you want to enter again? (Y/N)> ");
 					String retry=input.next().toLowerCase();
 					if(retry.equals("y")){
 						continue L1;
@@ -492,15 +514,20 @@ class IHungry{
 			System.out.println("|                       DELIVERED ORDER                       |");
 			System.out.println("---------------------------------------------------------------\n\n");
 			
-			System.out.println("-------------------------------------------------------------------");
-			System.out.printf(" %-10s %-16s %-13s %8s %13s |\n","OrderID", "CustomerID", "Name", "Quantity", "OrderValue");
-			System.out.println("-------------------------------------------------------------------");
-			for(int i=0; i<orderStatusArray.length; i++){
-				if(orderStatusArray[i]==DELIVERED){
-					System.out.printf(" %-10s %-16s %-13s %5d %16.2f |\n",orderIdArray[i], customerIdArray[i], nameArray[i], qtyArray[i], qtyArray[i]*BURGERPRICE);
-					System.out.println("-------------------------------------------------------------------");
+			if(isHaveDeliveryDetails(DELIVERED)){
+				System.out.println("-------------------------------------------------------------------");
+				System.out.printf(" %-10s %-16s %-13s %8s %13s |\n","OrderID", "CustomerID", "Name", "Quantity", "OrderValue");
+				System.out.println("-------------------------------------------------------------------");
+				for(int i=0; i<orderStatusArray.length; i++){
+					if(orderStatusArray[i]==DELIVERED){
+						System.out.printf(" %-10s %-16s %-13s %5d %16.2f |\n",orderIdArray[i], customerIdArray[i], nameArray[i], qtyArray[i], qtyArray[i]*BURGERPRICE);
+						System.out.println("-------------------------------------------------------------------");
+					}
 				}
+			}else{
+				System.out.println("\tNo delivery details...\n");
 			}
+			
 			L2:do{
 				System.out.print("\nDo you want to go to main menu? (Y/N)> ");
 				String retry=input.next().toLowerCase();
@@ -524,15 +551,20 @@ class IHungry{
 			System.out.println("|                       PREPARING ORDER                       |");
 			System.out.println("---------------------------------------------------------------\n\n");
 			
-			System.out.println("-------------------------------------------------------------------");
-			System.out.printf(" %-10s %-16s %-13s %8s %13s |\n","OrderID", "CustomerID", "Name", "Quantity", "OrderValue");
-			System.out.println("-------------------------------------------------------------------");
-			for(int i=0; i<orderStatusArray.length; i++){
-				if(orderStatusArray[i]==PREPARING){
-					System.out.printf(" %-10s %-16s %-13s %5d %16.2f |\n",orderIdArray[i], customerIdArray[i], nameArray[i], qtyArray[i], qtyArray[i]*BURGERPRICE);
-					System.out.println("-------------------------------------------------------------------");
+			if(isHaveDeliveryDetails(PREPARING)){
+				System.out.println("-------------------------------------------------------------------");
+				System.out.printf(" %-10s %-16s %-13s %8s %13s |\n","OrderID", "CustomerID", "Name", "Quantity", "OrderValue");
+				System.out.println("-------------------------------------------------------------------");
+				for(int i=0; i<orderStatusArray.length; i++){
+					if(orderStatusArray[i]==PREPARING){
+						System.out.printf(" %-10s %-16s %-13s %5d %16.2f |\n",orderIdArray[i], customerIdArray[i], nameArray[i], qtyArray[i], qtyArray[i]*BURGERPRICE);
+						System.out.println("-------------------------------------------------------------------");
+					}
 				}
+			}else{
+				System.out.println("\tNo preparing details...\n");
 			}
+			
 			L2:do{
 				System.out.print("\nDo you want to go to main menu? (Y/N)> ");
 				String retry=input.next().toLowerCase();
@@ -555,16 +587,21 @@ class IHungry{
 			System.out.println("---------------------------------------------------------------");
 			System.out.println("|                       CANCELLED ORDER                       |");
 			System.out.println("---------------------------------------------------------------\n\n");
-			
-			System.out.println("-------------------------------------------------------------------");
-			System.out.printf(" %-10s %-16s %-13s %8s %13s |\n","OrderID", "CustomerID", "Name", "Quantity", "OrderValue");
-			System.out.println("-------------------------------------------------------------------");
-			for(int i=0; i<orderStatusArray.length; i++){
-				if(orderStatusArray[i]==CANCEL){
-					System.out.printf(" %-10s %-16s %-13s %5d %16.2f |\n",orderIdArray[i], customerIdArray[i], nameArray[i], qtyArray[i], qtyArray[i]*BURGERPRICE);
-					System.out.println("-------------------------------------------------------------------");
+				
+			if(isHaveDeliveryDetails(CANCEL)){
+				System.out.println("-------------------------------------------------------------------");
+				System.out.printf(" %-10s %-16s %-13s %8s %13s |\n","OrderID", "CustomerID", "Name", "Quantity", "OrderValue");
+				System.out.println("-------------------------------------------------------------------");
+				for(int i=0; i<orderStatusArray.length; i++){
+					if(orderStatusArray[i]==CANCEL){
+						System.out.printf(" %-10s %-16s %-13s %5d %16.2f |\n",orderIdArray[i], customerIdArray[i], nameArray[i], qtyArray[i], qtyArray[i]*BURGERPRICE);
+						System.out.println("-------------------------------------------------------------------");
+					}
 				}
+			}else{
+				System.out.println("\tNo cancelled details...\n");
 			}
+			
 			L2:do{
 				System.out.print("\nDo you want to go to main menu? (Y/N)> ");
 				String retry=input.next().toLowerCase();
@@ -596,42 +633,46 @@ class IHungry{
 				orderId=input.next();
 			}
 			
-			if(isDeliveredOrderId(orderId)){
-				System.out.println("\nThe Order is already delivered...You can not update this order...");
-			}else if(isCancelledOrderId(orderId)){
-				System.out.println("\nThe Order is already cancelled...You can not update this order...");
-			}else{
-				for(int i=0; i<orderIdArray.length; i++){
-					if(orderId.equalsIgnoreCase(orderIdArray[i])){
-						System.out.printf("\nOrderID       - %s\n",orderIdArray[i]);
-						System.out.printf("CustomerID    - %s\n",customerIdArray[i]);
-						System.out.printf("Name          - %s\n",nameArray[i]);
-						System.out.printf("Quantity      - %d\n",qtyArray[i]);
-						System.out.printf("OrderValue    - %.2f\n",qtyArray[i]*BURGERPRICE);
-						System.out.printf("OrderStatus   - %s\n",getOrderStatusName(orderStatusArray[i]));
+			if(isHaveOrderDetails(orderId)){
+				if(isDeliveredOrderId(orderId)){
+					System.out.println("\nThe Order is already delivered...You can not update this order...");
+				}else if(isCancelledOrderId(orderId)){
+					System.out.println("\nThe Order is already cancelled...You can not update this order...");
+				}else{
+					for(int i=0; i<orderIdArray.length; i++){
+						if(orderId.equalsIgnoreCase(orderIdArray[i])){
+							System.out.printf("\nOrderID       - %s\n",orderIdArray[i]);
+							System.out.printf("CustomerID    - %s\n",customerIdArray[i]);
+							System.out.printf("Name          - %s\n",nameArray[i]);
+							System.out.printf("Quantity      - %d\n",qtyArray[i]);
+							System.out.printf("OrderValue    - %.2f\n",qtyArray[i]*BURGERPRICE);
+							System.out.printf("OrderStatus   - %s\n",getOrderStatusName(orderStatusArray[i]));
+						}
 					}
-				}
-				
-				L2:do{
-					System.out.println("\nWhat do you want to update ?");
-					System.out.println("\t(01) Quantity");
-					System.out.println("\t(02) Status\n");
 					
-					System.out.print("Enter your option - ");
-					int option=input.nextInt();
-				
-					switch(option){
-						case 1 :
-							updateQuantity(orderId);
-							break;
-						case 2 :
-							updateStatus(orderId);
-							break;
-						default :
-							System.out.println("\tWrong option...\n");
-							continue L2;
+					L2:do{
+						System.out.println("\nWhat do you want to update ?");
+						System.out.println("\t(01) Quantity");
+						System.out.println("\t(02) Status\n");
+						
+						System.out.print("Enter your option - ");
+						int option=input.nextInt();
+					
+						switch(option){
+							case 1 :
+								updateQuantity(orderId);
+								break;
+							case 2 :
+								updateStatus(orderId);
+								break;
+							default :
+								System.out.println("\tWrong option...\n");
+								continue L2;
+						}
+					}while(true);
 				}
-				}while(true);
+			}else{
+				System.out.println("\n\n\tNo order details found...\n");
 			}
 			
 			L3:do{

@@ -1,6 +1,6 @@
-# iHungry Burger Shop Management System
+# 🍔 iHungry Burger Shop 🏪
 
-A console-based Java application for managing burger orders in a restaurant. This system allows users to place orders, track customers, manage order status, and generate reports.
+A console-based Java application for managing burger orders in a restaurant. This system allows users to place orders, track customers, manage order status, and generate reports. 📊✨
 
 ## 📋 Table of Contents
 
@@ -16,28 +16,28 @@ A console-based Java application for managing burger orders in a restaurant. Thi
 - [Sample Data](#-sample-data)
 - [Contributing](#-contributing)
 
-## 🚀 Features
+## 🚀 Features ⭐
 
-### Order Management
-- **Place New Orders**: Add customer orders with automatic order ID generation
-- **Search Orders**: Find specific orders by Order ID with enhanced validation
-- **Update Orders**: Modify quantity and status of existing orders
-- **View Orders**: Filter orders by status (Delivered, Preparing, Cancelled)
+### 📋 Order Management
+- **🆕 Place New Orders**: Add customer orders with automatic order ID generation
+- **🔍 Search Orders**: Find specific orders by Order ID with enhanced validation
+- **✏️ Update Orders**: Modify quantity and status of existing orders
+- **👀 View Orders**: Filter orders by status (Delivered, Preparing, Cancelled)
 
-### Customer Management
-- **Customer Registration**: Automatically register new customers
-- **Customer Search**: Find customer details and order history with validation
-- **Best Customer Analysis**: Identify top customers by total purchase value
+### 👥 Customer Management
+- **📝 Customer Registration**: Automatically register new customers
+- **🔎 Customer Search**: Find customer details and order history with validation
+- **🏆 Best Customer Analysis**: Identify top customers by total purchase value
 
-### System Features
-- **Automatic Order ID Generation**: Sequential burger order IDs (B0001, B0002, etc.)
-- **Enhanced Input Validation**: Comprehensive validation for phone numbers, order IDs, and quantities
-- **Dynamic Data Storage**: Arrays that automatically expand as needed
-- **Cross-platform Console Clearing**: Works on Windows and Unix-based systems
-- **Error Prevention**: Robust validation prevents invalid data entry
-- **Clean Architecture**: Streamlined code with improved maintainability
-- **Improved User Experience**: Better error messages and structured confirmation flows
-- **Graceful Exit**: Proper application termination with thank you message
+### 🛠️ System Features
+- **🎯 Automatic Order ID Generation**: Sequential burger order IDs (B0001, B0002, etc.)
+- **✅ Enhanced Input Validation**: Comprehensive validation for phone numbers, order IDs, and quantities
+- **📈 Dynamic Data Storage**: Arrays that automatically expand as needed
+- **🖥️ Cross-platform Console Clearing**: Works on Windows and Unix-based systems
+- **🛡️ Error Prevention**: Robust validation prevents invalid data entry
+- **🏗️ Clean Architecture**: Streamlined code with improved maintainability
+- **😊 Improved User Experience**: Better error messages and structured confirmation flows
+- **👋 Graceful Exit**: Proper application termination with thank you message
 
 ## 💻 System Requirements
 
@@ -93,44 +93,44 @@ iHungry-Shop/
 └── .git/              # Git repository folder
 ```
 
-## 🍔 Menu Options
+## 🍔 Menu Options 🎮
 
-### 1. Place Order
-- Generate automatic order ID
-- Validate customer phone number (10 digits starting with 0)
-- Handle new and returning customers
-- Calculate total order value
-- **Enhanced confirmation flow** with retry options
-- **Improved error handling** for invalid confirmations
-- **Better user guidance** with clear option prompts
+### 1️⃣ Place Order 🆕
+- 🎯 Generate automatic order ID
+- 📞 Validate customer phone number (10 digits starting with 0)
+- 👤 Handle new and returning customers
+- 💰 Calculate total order value
+- **✨ Enhanced confirmation flow** with retry options
+- **🛡️ Improved error handling** for invalid confirmations
+- **🧭 Better user guidance** with clear option prompts
 
-### 2. Search Best Customer
-- Display customers ranked by total purchase amount
-- Show customer ID, name, and total spent
-- Sorted in descending order of purchase value
+### 2️⃣ Search Best Customer 🏆
+- 📊 Display customers ranked by total purchase amount
+- 👤 Show customer ID, name, and total spent
+- 📈 Sorted in descending order of purchase value
 
-### 3. Search Order
-- Find orders by Order ID with **enhanced input validation**
-- Display complete order details including status
-- **Improved error handling** - validates order ID format before search
-- Validate order ID format (B + 4 digits)
-- Retry mechanism for invalid inputs
+### 3️⃣ Search Order 🔍
+- 🎯 Find orders by Order ID with **enhanced input validation**
+- 📄 Display complete order details including status
+- **🛡️ Improved error handling** - validates order ID format before search
+- ✅ Validate order ID format (B + 4 digits)
+- 🔄 Retry mechanism for invalid inputs
 
-### 4. Search Customer
-- Search by customer phone number
-- Show customer information and order history
-- Display all orders placed by the customer
+### 4️⃣ Search Customer 👥
+- 📞 Search by customer phone number
+- ℹ️ Show customer information and order history
+- 📋 Display all orders placed by the customer
 
-### 5. View Orders
-- **Delivered Orders**: View all completed orders
-- **Preparing Orders**: View orders in preparation
-- **Cancelled Orders**: View cancelled orders
+### 5️⃣ View Orders 👀
+- **✅ Delivered Orders**: View all completed orders
+- **🍳 Preparing Orders**: View orders in preparation
+- **❌ Cancelled Orders**: View cancelled orders
 
-### 6. Update Order Details
-- Modify order quantity for non-delivered orders with **quantity validation**
-- Change order status (Cancelled ← Preparing → Delivered)
-- Prevent updates to delivered/cancelled orders
-- **Enhanced validation**: Ensures only positive quantities are accepted
+### 6️⃣ Update Order Details ✏️
+- 🔢 Modify order quantity for non-delivered orders with **quantity validation**
+- 🔄 Change order status (Cancelled ← Preparing → Delivered)
+- 🚫 Prevent updates to delivered/cancelled orders
+- **✅ Enhanced validation**: Ensures only positive quantities are accepted
 
 ## 💾 Data Management
 
@@ -148,33 +148,33 @@ The system uses in-memory arrays to store data:
 - **Automatic Expansion**: Arrays automatically expand when new orders are placed using the `extendArray()` method
 - **Clean Start**: Each program execution begins with no pre-existing data
 
-## 📊 Order Status
+## 📊 Order Status 🏷️
 
-| Status Code | Status Name | Description |
-|-------------|-------------|-------------|
-| 0 | Cancelled | Order has been cancelled |
-| 1 | Preparing | Order is being prepared |
-| 2 | Delivered | Order has been delivered |
+| Status Code | Status Name | Description | Emoji |
+|-------------|-------------|-------------|-------|
+| 0 | ❌ Cancelled | Order has been cancelled | 🚫 |
+| 1 | 🍳 Preparing | Order is being prepared | ⏳ |
+| 2 | ✅ Delivered | Order has been delivered | 🎉 |
 
-## ✅ Validation Rules
+## ✅ Validation Rules 🔒
 
-### Customer ID (Phone Number)
-- Must be exactly 10 digits
-- Must start with '0'
-- Must contain only numeric characters
-- **Applied in**: Place Order, Search Customer, Update Order Details
+### 📞 Customer ID (Phone Number)
+- 🔟 Must be exactly 10 digits
+- 0️⃣ Must start with '0'
+- 🔢 Must contain only numeric characters
+- **🎯 Applied in**: Place Order, Search Customer, Update Order Details
 
-### Order ID
-- Must be exactly 5 characters
-- Must start with 'B' or 'b'
-- Last 4 characters must be numeric
-- **Applied in**: Search Order, Update Order Details
-- **Enhanced validation**: Prevents invalid searches and updates
+### 🆔 Order ID
+- 5️⃣ Must be exactly 5 characters
+- 🅱️ Must start with 'B' or 'b'
+- 🔢 Last 4 characters must be numeric
+- **🎯 Applied in**: Search Order, Update Order Details
+- **🛡️ Enhanced validation**: Prevents invalid searches and updates
 
-### Quantity Validation
-- Must be a positive integer (greater than 0)
-- **Applied in**: Update Order Quantity
-- **Prevents**: Zero or negative quantity values
+### 🔢 Quantity Validation
+- ➕ Must be a positive integer (greater than 0)
+- **🎯 Applied in**: Update Order Quantity
+- **🚫 Prevents**: Zero or negative quantity values
 
 ## 📋 Data Storage
 
@@ -185,38 +185,38 @@ The system uses empty arrays that dynamically populate as users add data:
 - **Runtime Data**: All customer and order information is entered during program execution
 - **Fresh Start**: Each program run begins with a clean slate
 
-**Burger Price**: Rs. 500.00 per burger
+**🍔 Burger Price**: Rs. 500.00 per burger 💰
 
-## 🔧 Key Constants
+## 🔧 Key Constants ⚙️
 
 ```java
-final static double BURGERPRICE = 500;    // Price per burger
-public static final int CANCEL = 0;       // Order status: Cancelled
-public static final int PREPARING = 1;    // Order status: Preparing
-public static final int DELIVERED = 2;    // Order status: Delivered
+final static double BURGERPRICE = 500;    // 🍔 Price per burger
+public static final int CANCEL = 0;       // ❌ Order status: Cancelled
+public static final int PREPARING = 1;    // 🍳 Order status: Preparing
+public static final int DELIVERED = 2;    // ✅ Order status: Delivered
 ```
 
-## 🎨 Features Highlights
+## 🎨 Features Highlights ⭐
 
-- **User-Friendly Interface**: Clear menu options and prompts
-- **Enhanced Error Handling**: Comprehensive input validation and error messages with retry mechanisms  
-- **Data Persistence**: Maintains data throughout the session
-- **Flexible Updates**: Allow modifications only for appropriate order states
-- **Reporting**: Customer analysis and order filtering capabilities
-- **Robust Input Validation**: Prevents invalid data entry across all system functions
-- **Improved User Experience**: Better error messages and validation feedback
-- **Clean System Design**: Starts fresh with no pre-loaded data, building organically
-- **Production Ready**: Suitable for real-world deployment with proper data validation
+- **👤 User-Friendly Interface**: Clear menu options and prompts
+- **🛡️ Enhanced Error Handling**: Comprehensive input validation and error messages with retry mechanisms  
+- **💾 Data Persistence**: Maintains data throughout the session
+- **🔄 Flexible Updates**: Allow modifications only for appropriate order states
+- **📊 Reporting**: Customer analysis and order filtering capabilities
+- **🔒 Robust Input Validation**: Prevents invalid data entry across all system functions
+- **😊 Improved User Experience**: Better error messages and validation feedback
+- **🎯 Clean System Design**: Starts fresh with no pre-loaded data, building organically
+- **🚀 Production Ready**: Suitable for real-world deployment with proper data validation
 
-## 📝 Recent Updates
+## 📝 Recent Updates 🆕
 
-### Version Improvements (Latest - September 2025)
-- **Fixed Status Constants**: Corrected order status mapping (CANCEL=0, PREPARING=1, DELIVERED=2)
-- **Enhanced Place Order Flow**: Improved confirmation process with better error handling
-- **Proper Array Initialization**: Standardized empty array initialization syntax
-- **Better Exit Functionality**: Added graceful application termination with thank you message
-- **Improved User Experience**: Enhanced error messages and structured confirmation flows
-- **Code Consistency**: Fixed all status-related functions to use correct constants
+### 🎉 Version Improvements (Latest - September 2025)
+- **🔧 Fixed Status Constants**: Corrected order status mapping (CANCEL=0, PREPARING=1, DELIVERED=2)
+- **⚡ Enhanced Place Order Flow**: Improved confirmation process with better error handling
+- **📋 Proper Array Initialization**: Standardized empty array initialization syntax
+- **👋 Better Exit Functionality**: Added graceful application termination with thank you message
+- **😊 Improved User Experience**: Enhanced error messages and structured confirmation flows
+- **🔄 Code Consistency**: Fixed all status-related functions to use correct constants
 
 ### Previous Updates
 - **Clean Architecture**: Removed sample data for a fresh system experience
@@ -257,3 +257,21 @@ This project is part of coursework for **ICD119** and demonstrates:
 ---
 
 *Developed as part of ICD119 Coursework - Burger Shop Management System*
+
+## 🔄 Object-Oriented Refactor ⚡
+
+This program now uses an object-oriented approach for managing orders. All order data is encapsulated in a `Customer` class, and a single `Customer[]` array is used to store all orders, replacing the previous parallel arrays. 🎯
+
+### 🔑 Key Changes
+- ➕ Added a `Customer` class with fields: `orderId`, `customerId`, `name`, `quantity`, and `orderStatus`.
+- 🔄 All order management logic now uses the `Customer` object array.
+- 🛠️ Methods for placing, searching, updating, and viewing orders have been refactored to use the new class structure.
+
+### 🎉 Benefits
+- 📈 Improved code maintainability and readability
+- ➕ Easier to add new features or fields
+- 🔒 Data is better encapsulated and managed
+- 🏗️ Follows proper object-oriented programming principles
+
+## 🚀 Usage
+Run the program as before. All functionality remains the same, but the code is now cleaner and more robust. ✨
