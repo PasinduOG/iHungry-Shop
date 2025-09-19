@@ -2,7 +2,7 @@
 
 A comprehensive console-based Java application for managing burger orders in a restaurant. This system provides complete order management, customer tracking, status updates, and detailed reporting capabilities. 📊✨
 
-## 📋 Table of Conte### ✅ Latest Fixes (September 2025)
+## 📋 Table of Contexts ✅ Latest Fixes (September 2025)
 - **🔧 Status Mapping Fixed**: ### 🏗️ Architecture Design
 - **📊 Parallel Arrays**: Uses 5 synchronized arrays for data relationships
 - **🎯 Index Management**: Maintains data consistency through coordinated array operations
