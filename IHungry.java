@@ -747,9 +747,9 @@ class IHungry{
 					System.out.printf("CustomerID    - %s\n",customerIdArray[i]);
 					System.out.printf("Name          - %s\n\n",nameArray[i]);
 					
-					System.out.println("\t(0)Preparing");
-					System.out.println("\t(1)Delivered");
-					System.out.println("\t(2)Cancel");
+					System.out.println("\t(0)Cancel");
+					System.out.println("\t(1)Preparing");
+					System.out.println("\t(2)Delivered");
 					
 					System.out.print("\nEnter new order status - ");
 					int newOrderId=input.nextInt();
@@ -760,7 +760,7 @@ class IHungry{
 					}
 					orderStatusArray[i]=newOrderId;
 					
-					System.out.println("\n\tUpdate order quantity successfully...\n");
+					System.out.println("\n\tUpdate order status successfully...\n");
 					
 					System.out.printf("New order status - %s\n",getOrderStatusName(orderStatusArray[i]));
 				}
