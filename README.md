@@ -68,7 +68,7 @@ java IHungry
 ```
 
 ### 🚀 First Launch
-Upon starting, you'll see the main menu interface:
+Upon starting, you'll see the main menu with **4 pre-loaded sample orders** ready for immediate testing:
 
 ```
 --------------------------------------------------------------
@@ -82,6 +82,13 @@ Upon starting, you'll see the main menu interface:
 
 Enter an option to continue >
 ```
+
+**Try these sample features immediately:**
+- 🔍 Search for order **"B0001"**, **"B0002"**, **"B0003"**, or **"B0004"**
+- 🏆 View **"Search Best Customer"** to see **Pasindu** as top customer (7 burgers, Rs. 3,500)
+- 📋 Check **"Preparing Orders"** to see **3 active orders** ready for updates
+- ✏️ Update order **B0001** status from **Preparing** to **Delivered**
+- 👥 Search customer **"0712345678"** to see **Pasindu's** order history
 
 ## 🎮 How to Use
 
@@ -146,22 +153,28 @@ iHungry-Shop/
 ## 💾 Data Architecture
 
 ### Current Implementation
-The system uses **parallel arrays** for data storage - a structured approach where related data is stored across multiple synchronized arrays:
+The system uses **parallel arrays** for data storage with **pre-loaded sample data** - a structured approach where related data is stored across multiple synchronized arrays:
 
 ```java
-public static String[] orderIdArray = new String[0];    // Order IDs (B0001, B0002...)
-public static String[] customerIdArray = new String[0]; // Phone numbers (10 digits)
-public static String[] nameArray = new String[0];       // Customer names
-public static int[] qtyArray = new int[0];              // Burger quantities
-public static int[] orderStatusArray = new int[0];      // Status codes (0,1,2)
+public static String[] orderIdArray = new String[]{"B0001","B0002","B0003","B0004"};
+public static String[] customerIdArray = new String[]{"0712345678","0719876545","0772345678","0712345678"};
+public static String[] nameArray = new String[]{"Pasindu","Ravindu","Kavindu","Pasindu"};
+public static int[] qtyArray = new int[]{2,3,2,5};
+public static int[] orderStatusArray = new int[]{1,1,2,1}; // 1=Preparing, 2=Delivered
 ```
+
+### Sample Data Overview
+- **📊 Pre-loaded Orders**: System starts with 4 demonstration orders
+- **👥 Customer Mix**: 3 unique customers with repeat customer (Pasindu)
+- **📈 Status Variety**: Mix of Preparing (3) and Delivered (1) orders
+- **💰 Revenue Demo**: Total of 12 burgers worth Rs. 6,000.00
 
 ### Data Flow & Management
 - **📊 Synchronized Arrays**: All arrays maintain the same index relationships
-- **📈 Dynamic Expansion**: Arrays automatically grow using `extendArray()` method
+- **📈 Dynamic Expansion**: Arrays automatically grow using `extendArray()` method when new orders are added
 - **🎯 Index Consistency**: Each order occupies the same index across all arrays
 - **💾 Runtime Storage**: All data exists only in memory during program execution
-- **🔄 Fresh Sessions**: Each restart begins with empty arrays
+- **🎯 Demo Ready**: Pre-loaded data allows immediate testing of all features
 
 ### Key Data Elements
 - **🆔 Order IDs**: Auto-generated sequential format (B0001, B0002, B0003...)
@@ -238,16 +251,26 @@ public static final int DELIVERED = 2;    // ✅ Completed orders
 - **Error Prevention**: Invalid data rejected before processing
 - **Boundary Checking**: Prevents array overflow and data corruption
 
-## 📋 Data Storage
+## � Data Storage & Sample Data
 
-The system uses empty arrays that dynamically populate as users add data:
+The system comes with **pre-loaded sample data** for demonstration purposes:
 
-- **Initial State**: All arrays start empty for a fresh system experience
-- **Dynamic Growth**: Arrays automatically expand when new orders are placed
-- **Runtime Data**: All customer and order information is entered during program execution
-- **Fresh Start**: Each program run begins with a clean slate
+### Sample Orders
+- **B0001**: Customer 0712345678 (Pasindu) - 2 burgers, Preparing - Rs. 1,000.00
+- **B0002**: Customer 0719876545 (Ravindu) - 3 burgers, Preparing - Rs. 1,500.00  
+- **B0003**: Customer 0772345678 (Kavindu) - 2 burgers, Delivered - Rs. 1,000.00
+- **B0004**: Customer 0712345678 (Pasindu) - 5 burgers, Preparing - Rs. 2,500.00
 
-**🍔 Burger Price**: Rs. 500.00 per burger 💰
+### Key Features
+- **📊 Pre-loaded Data**: System starts with 4 sample orders for immediate testing
+- **📈 Dynamic Expansion**: Arrays automatically grow when new orders are added
+- **🎯 Index Consistency**: All arrays maintain synchronized relationships
+- **💾 Runtime Persistence**: Data persists during program execution
+- **🔄 Demo Ready**: Perfect for showcasing all system features immediately
+- **👥 Customer Variety**: Includes repeat customers to demonstrate customer analysis features
+
+**🍔 Burger Price**: Rs. 500.00 per burger 💰  
+**💰 Sample Revenue**: Total 12 burgers = Rs. 6,000.00
 
 ## 🔧 Key Constants ⚙️
 
@@ -274,10 +297,12 @@ public static final int DELIVERED = 2;    // ✅ Order status: Delivered
 
 ### 🎉 System Status (Current - September 2025)
 - **🟢 Fully Operational**: All core features working without errors
+- **📊 Demo Ready**: 4 sample orders available for immediate testing and feature demonstration
 - **✅ Status System Fixed**: UI mapping now correctly aligns with status constants
 - **📝 Message Accuracy**: Update confirmations display correct field names
 - **🔄 Flow Control Enhanced**: Eliminated infinite loop issues in update workflows
 - **🛡️ Validation Improved**: Comprehensive input checking prevents data corruption
+- **🎯 Pre-loaded Data**: System includes sample customers and orders for instant functionality showcase
 
 ### Previous Enhancements
 - **Clean Architecture**: System starts fresh with no pre-loaded sample data

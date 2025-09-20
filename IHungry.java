@@ -6,12 +6,13 @@ class IHungry{
 	public static final int PREPARING=1;
 	public static final int DELIVERED=2;
 	
-	public static String[] orderIdArray=new String[0];
+	public static String[] orderIdArray=new String[]{"B0001","B0002","B0003","B0004",};
+	public static String[] customerIdArray=new String[]{"0712345678","0719876545","0772345678","0712345678",};
+	public static String[] nameArray=new String[]{"Pasindu","Ravindu","Kavindu","Pasindu",};
+	public static int[] qtyArray=new int[]{2,3,2,5};
+	public static int[] orderStatusArray=new int[]{1,1,2,1};
+	
 	public static int orderCount=0;
-	public static String[] customerIdArray=new String[0];
-	public static String[] nameArray=new String[0];
-	public static int[] qtyArray=new int[0];
-	public static int[] orderStatusArray=new int[0];
 	
 	public static String generateOrderId(){
 		int nextId=orderCount+1;
@@ -199,10 +200,20 @@ class IHungry{
 			
 			System.out.print("Enter Customer ID (phone no.) : ");
 			String customerId=input.next();
-			while(!isValidCustomerId(customerId)){
-				System.out.println("\tInvalid phone number... Try again...!\n");
-				System.out.print("Enter Customer ID (phone no.) : ");
-				customerId=input.next();
+			if(!isValidCustomerId(customerId)){
+				L2:do{
+					System.out.println("\tInvalid phone number... Try again...!\n");
+					System.out.print("Do you want to try again? (Y/N) : ");
+					String retry=input.next().toLowerCase();
+					if(retry.equals("y")){
+						continue L1;
+					}else if(retry.equals("n")){
+						break L1;
+					}else{
+						System.out.print("\tWrong option\n\n");
+						continue L2;
+					}
+				}while(true);
 			}
 			String index=getName(customerId);
 			String customerName="";
@@ -213,58 +224,65 @@ class IHungry{
 				System.out.printf("Customer Name                 : %s\n",index);
 			}
 			
-			System.out.print("Enter Burger Quantity         - ");
-			int qty=input.nextInt();
-			
-			double total=(double)BURGERPRICE*qty;
-			System.out.printf("Total Value                   - %.2f\n",total);
-			
-			L2:do{
-				System.out.print("\tAre you confirm order - ");
-				String confirm=input.next().toLowerCase();
-				if(confirm.equals("y")){
-					orderCount++;
-					extendArray();
-					
-					orderStatusArray[orderStatusArray.length-1]=PREPARING;
-					orderIdArray[orderIdArray.length-1]=newOrderId;
-					customerIdArray[customerIdArray.length-1]=customerId;
-					if(index.equals("")){
-						nameArray[nameArray.length-1]=customerName;
-					}else{
-						nameArray[nameArray.length-1]=index;
-					}
-					qtyArray[qtyArray.length-1]=qty;
-					System.out.println("\n\tYour order is entered to the system successfully...");
-					L3:do{
-						System.out.print("\nDo you want to place another order (Y/N): ");
-						String addNewOrder=input.next().toLowerCase();
-						if(addNewOrder.equals("y")){
-							continue L1;
-						}else if(addNewOrder.equals("n")){
-							break L1;
-						}else{
-							System.out.println("\tWrong option\n");
-							continue L3;
-						}
-					}while(true);
-				}else if(confirm.equals("n")){
-					L4:do{
-						System.out.print("\nDo you want to retry: ");
-						String addNewOrder=input.next().toLowerCase();
-						if(addNewOrder.equals("y")){
-							continue L1;
-						}else if(addNewOrder.equals("n")){
-							break L1;
-						}else{
-							System.out.println("\tWrong option\n");
-							continue L4;
-						}
-					}while(true);
-				}else{
-					System.out.println("\t\tWrong option\n");
-					continue L2;
+			int qty;
+			R1:do{
+				System.out.print("Enter Burger Quantity         - ");
+				qty=input.nextInt();
+				if(qty<=0){
+					System.out.println("\n\tInvalid burger quantity..Please try again...\n\n");
+					continue R1;
 				}
+				
+				double total=(double)BURGERPRICE*qty;
+				System.out.printf("Total Value                   - %.2f\n",total);
+			
+				L2:do{
+					System.out.print("\tAre you confirm order - ");
+					String confirm=input.next().toLowerCase();
+					if(confirm.equals("y")){
+						orderCount++;
+						extendArray();
+						
+						orderStatusArray[orderStatusArray.length-1]=PREPARING;
+						orderIdArray[orderIdArray.length-1]=newOrderId;
+						customerIdArray[customerIdArray.length-1]=customerId;
+						if(index.equals("")){
+							nameArray[nameArray.length-1]=customerName;
+						}else{
+							nameArray[nameArray.length-1]=index;
+						}
+						qtyArray[qtyArray.length-1]=qty;
+						System.out.println("\n\tYour order is entered to the system successfully...");
+						L3:do{
+							System.out.print("\nDo you want to place another order (Y/N): ");
+							String addNewOrder=input.next().toLowerCase();
+							if(addNewOrder.equals("y")){
+								continue L1;
+							}else if(addNewOrder.equals("n")){
+								break L1;
+							}else{
+								System.out.println("\tWrong option\n");
+								continue L3;
+							}
+						}while(true);
+					}else if(confirm.equals("n")){
+						L4:do{
+							System.out.print("\nDo you want to retry: ");
+							String addNewOrder=input.next().toLowerCase();
+							if(addNewOrder.equals("y")){
+								continue L1;
+							}else if(addNewOrder.equals("n")){
+								break L1;
+							}else{
+								System.out.println("\tWrong option\n");
+								continue L4;
+							}
+						}while(true);
+					}else{
+						System.out.println("\t\tWrong option\n");
+						continue L2;
+					}
+				}while(true);
 			}while(true);
 		}while(true);
 	}
@@ -369,10 +387,20 @@ class IHungry{
 			
 			System.out.print("Enter order Id - ");
 			String orderId=input.next();
-			while(!isValidOrderId(orderId)){
-				System.out.println("\tInvalid Order ID...Please try again...\n");
-				System.out.print("Enter order Id - ");
-				orderId=input.next();
+			if(!isValidOrderId(orderId)){
+				L2:do{
+					System.out.println("\tInvalid Order ID...Please try again...\n");
+					System.out.print("Do you want to try again? (Y/N) : ");
+					String retry=input.next().toLowerCase();
+					if(retry.equals("y")){
+						continue L1;
+					}else if(retry.equals("n")){
+						break L1;
+					}else{
+						System.out.print("\tWrong option\n\n");
+						continue L2;
+					}
+				}while(true);
 			}
 			
 			boolean haveDetails=false;
@@ -425,10 +453,20 @@ class IHungry{
 			
 			System.out.print("Enter customer Id - ");
 			String customerId=input.next();
-			while(!isValidCustomerId(customerId)){
-				System.out.println("\tInvalid phone number... Try again...!\n");
-				System.out.print("Enter Customer Id (phone no.) : ");
-				customerId=input.next();
+			if(!isValidCustomerId(customerId)){
+				L2:do{
+					System.out.println("\tInvalid phone number... Try again...!\n");
+					System.out.print("Do you want to try again? (Y/N) : ");
+					String retry=input.next().toLowerCase();
+					if(retry.equals("y")){
+						continue L1;
+					}else if(retry.equals("n")){
+						break L1;
+					}else{
+						System.out.print("\tWrong option\n\n");
+						continue L2;
+					}
+				}while(true);
 			}
 			
 			if(!indexOf(customerId)){
@@ -627,10 +665,20 @@ class IHungry{
 			
 			System.out.print("Enter order Id - ");
 			String orderId=input.next();
-			while(!isValidOrderId(orderId)){
-				System.out.println("\tInvalid Order ID...Please try again...\n");
-				System.out.print("Enter order Id - ");
-				orderId=input.next();
+			if(!isValidOrderId(orderId)){
+				L2:do{
+					System.out.println("\tInvalid Order ID...Please try again...\n");
+					System.out.print("Do you want to try again? (Y/N) : ");
+					String retry=input.next().toLowerCase();
+					if(retry.equals("y")){
+						continue L1;
+					}else if(retry.equals("n")){
+						break L1;
+					}else{
+						System.out.print("\tWrong option\n\n");
+						continue L2;
+					}
+				}while(true);
 			}
 			
 			if(isHaveOrderDetails(orderId)){
