@@ -12,7 +12,7 @@ class IHungry{
 	public static int[] qtyArray=new int[]{2,3,2,5};
 	public static int[] orderStatusArray=new int[]{1,1,2,1};
 	
-	public static int orderCount=0;
+	public static int orderCount=orderIdArray.length;
 	
 	public static String generateOrderId(){
 		int nextId=orderCount+1;
