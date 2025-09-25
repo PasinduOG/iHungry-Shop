@@ -9,8 +9,8 @@ class IHungry{
 	public static String[] orderIdArray=new String[]{};
 	public static String[] customerIdArray=new String[]{};
 	public static String[] nameArray=new String[]{};
-	public static int[] qtyArray=new int[]{2,3,2,5};
-	public static int[] orderStatusArray=new int[]{1,1,2,1};
+	public static int[] qtyArray=new int[]{};
+	public static int[] orderStatusArray=new int[]{};
 	
 	public static int orderCount=orderIdArray.length;
 	
