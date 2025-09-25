@@ -2,10 +2,11 @@
 
 A comprehensive console-based Java application for managing burger orders in a restaurant. This system provides complete order management, customer tracking, status updates, and detailed reporting capabilities. 📊✨
 
-## 🎉 Major Improvements (September 2025)
+## 🎉 Major Improvements (September 25, 2025)
 - **✅ Status Mapping Fixed**: UI options now correctly align with status constants (0=Cancel, 1=Preparing, 2=Delivered)
 - **✅ Success Messages Corrected**: Update methods display accurate messages for status vs quantity changes
 - **✅ Flow Control Enhanced**: Fixed infinite loop issues in update order details workflow
+- **✅ Documentation Updated**: README now accurately reflects empty array implementation
 
 ## 📋 Table of Contents
 
@@ -68,7 +69,7 @@ java IHungry
 ```
 
 ### 🚀 First Launch
-Upon starting, you'll see the main menu with **4 pre-loaded sample orders** ready for immediate testing:
+Upon starting, you'll see the main menu with a **completely empty system** ready for you to add your own data:
 
 ```
 --------------------------------------------------------------
@@ -83,21 +84,22 @@ Upon starting, you'll see the main menu with **4 pre-loaded sample orders** read
 Enter an option to continue >
 ```
 
-**Try these sample features immediately:**
-- 🔍 Search for order **"B0001"**, **"B0002"**, **"B0003"**, or **"B0004"**
-- 🏆 View **"Search Best Customer"** to see **Pasindu** as top customer (7 burgers, Rs. 3,500)
-- 📋 Check **"Preparing Orders"** to see **3 active orders** ready for updates
-- ✏️ Update order **B0001** status from **Preparing** to **Delivered**
-- 👥 Search customer **"0712345678"** to see **Pasindu's** order history
+**Start by building your data:**
+- 🆕 **Begin with Option 1** - Place Order to add your first customer and order
+- � Try searching features **after** you've added some orders
+- 🏆 View **"Search Best Customer"** once you have multiple customers
+- � Check **"View Orders"** to see orders you've created
+- ✏️ Update order quantities and status of your own orders
+- � Search functionality will work once you have data to search
 
 ## 🎮 How to Use
 
 ### Getting Started
-1. **📋 Start Fresh**: Each session begins with empty data
-2. **🆕 Place Orders**: Begin by adding some orders (Option 1)
-3. **🔍 Explore Features**: Use search and view options to see your data
-4. **✏️ Manage Orders**: Update quantities and status as needed
-5. **📊 Generate Reports**: View best customers and order analytics
+1. **📋 Fresh Start**: Each session begins with completely empty arrays for a clean experience
+2. **🆕 Place Orders First**: Begin by adding some orders (Option 1) to populate the system
+3. **🔍 Explore Features**: Once you have data, use search and view options
+4. **✏️ Manage Orders**: Update quantities and status of your created orders
+5. **📊 Generate Reports**: View best customers and order analytics after adding multiple orders
 
 ## 📁 Project Structure
 
@@ -153,28 +155,28 @@ iHungry-Shop/
 ## 💾 Data Architecture
 
 ### Current Implementation
-The system uses **parallel arrays** for data storage with **pre-loaded sample data** - a structured approach where related data is stored across multiple synchronized arrays:
+The system uses **parallel arrays** for data storage - a structured approach where related data is stored across multiple synchronized arrays that **start completely empty**:
 
 ```java
-public static String[] orderIdArray = new String[]{"B0001","B0002","B0003","B0004"};
-public static String[] customerIdArray = new String[]{"0712345678","0719876545","0772345678","0712345678"};
-public static String[] nameArray = new String[]{"Pasindu","Ravindu","Kavindu","Pasindu"};
-public static int[] qtyArray = new int[]{2,3,2,5};
-public static int[] orderStatusArray = new int[]{1,1,2,1}; // 1=Preparing, 2=Delivered
+public static String[] orderIdArray = new String[]{};     // Order IDs (B0001, B0002...)
+public static String[] customerIdArray = new String[]{};  // Phone numbers (10 digits)
+public static String[] nameArray = new String[]{};        // Customer names
+public static int[] qtyArray = new int[]{};               // Burger quantities
+public static int[] orderStatusArray = new int[]{};       // Status codes (0,1,2)
 ```
 
-### Sample Data Overview
-- **📊 Pre-loaded Orders**: System starts with 4 demonstration orders
-- **👥 Customer Mix**: 3 unique customers with repeat customer (Pasindu)
-- **📈 Status Variety**: Mix of Preparing (3) and Delivered (1) orders
-- **💰 Revenue Demo**: Total of 12 burgers worth Rs. 6,000.00
+### Clean State Design
+- **📊 Empty Start**: System begins with zero orders for a fresh experience
+- **👥 User-Driven Data**: All customers and orders are added by user during session
+- **📈 Organic Growth**: Data builds naturally as users place orders
+- **💰 Revenue Tracking**: Totals calculated from user-generated orders
 
 ### Data Flow & Management
 - **📊 Synchronized Arrays**: All arrays maintain the same index relationships
 - **📈 Dynamic Expansion**: Arrays automatically grow using `extendArray()` method when new orders are added
 - **🎯 Index Consistency**: Each order occupies the same index across all arrays
 - **💾 Runtime Storage**: All data exists only in memory during program execution
-- **🎯 Demo Ready**: Pre-loaded data allows immediate testing of all features
+- **🔄 Fresh Sessions**: Each program restart begins with completely empty arrays
 
 ### Key Data Elements
 - **🆔 Order IDs**: Auto-generated sequential format (B0001, B0002, B0003...)
@@ -251,26 +253,25 @@ public static final int DELIVERED = 2;    // ✅ Completed orders
 - **Error Prevention**: Invalid data rejected before processing
 - **Boundary Checking**: Prevents array overflow and data corruption
 
-## � Data Storage & Sample Data
+## 📊 Data Storage & System Architecture
 
-The system comes with **pre-loaded sample data** for demonstration purposes:
+The system uses **empty arrays** that dynamically populate as users add data:
 
-### Sample Orders
-- **B0001**: Customer 0712345678 (Pasindu) - 2 burgers, Preparing - Rs. 1,000.00
-- **B0002**: Customer 0719876545 (Ravindu) - 3 burgers, Preparing - Rs. 1,500.00  
-- **B0003**: Customer 0772345678 (Kavindu) - 2 burgers, Delivered - Rs. 1,000.00
-- **B0004**: Customer 0712345678 (Pasindu) - 5 burgers, Preparing - Rs. 2,500.00
+### Initial State
+- **All arrays start completely empty** for a fresh system experience
+- **No pre-loaded data** - users create their own orders and customer database
+- **Clean slate approach** allows users to build their own restaurant data organically
 
 ### Key Features
-- **📊 Pre-loaded Data**: System starts with 4 sample orders for immediate testing
-- **📈 Dynamic Expansion**: Arrays automatically grow when new orders are added
-- **🎯 Index Consistency**: All arrays maintain synchronized relationships
-- **💾 Runtime Persistence**: Data persists during program execution
-- **🔄 Demo Ready**: Perfect for showcasing all system features immediately
-- **👥 Customer Variety**: Includes repeat customers to demonstrate customer analysis features
+- **📊 Empty Start**: System begins with zero orders and customers
+- **📈 Dynamic Expansion**: Arrays automatically grow when new orders are added using `extendArray()` method
+- **🎯 Index Consistency**: All arrays maintain synchronized relationships as data is added
+- **💾 Runtime Persistence**: Data persists during program execution but resets on restart
+- **🔄 Fresh Sessions**: Each program run begins with completely empty arrays
+- **👥 User-Generated Data**: All customers and orders are created by user interaction
 
 **🍔 Burger Price**: Rs. 500.00 per burger 💰  
-**💰 Sample Revenue**: Total 12 burgers = Rs. 6,000.00
+**💰 Revenue Calculation**: Total value calculated from user-created orders
 
 ## 🔧 Key Constants ⚙️
 
@@ -295,14 +296,14 @@ public static final int DELIVERED = 2;    // ✅ Order status: Delivered
 
 ## 🎯 Latest Updates & Fixes
 
-### 🎉 System Status (Current - September 2025)
+### 🎉 System Status (Current - September 25, 2025)
 - **🟢 Fully Operational**: All core features working without errors
-- **📊 Demo Ready**: 4 sample orders available for immediate testing and feature demonstration
+- **📊 Clean Start Ready**: Empty arrays provide fresh system experience for user data creation
 - **✅ Status System Fixed**: UI mapping now correctly aligns with status constants
 - **📝 Message Accuracy**: Update confirmations display correct field names
 - **🔄 Flow Control Enhanced**: Eliminated infinite loop issues in update workflows
 - **🛡️ Validation Improved**: Comprehensive input checking prevents data corruption
-- **🎯 Pre-loaded Data**: System includes sample customers and orders for instant functionality showcase
+- **📋 Documentation Accurate**: README now correctly reflects empty array implementation
 
 ### Previous Enhancements
 - **Clean Architecture**: System starts fresh with no pre-loaded sample data

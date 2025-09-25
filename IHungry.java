@@ -6,9 +6,9 @@ class IHungry{
 	public static final int PREPARING=1;
 	public static final int DELIVERED=2;
 	
-	public static String[] orderIdArray=new String[]{"B0001","B0002","B0003","B0004",};
-	public static String[] customerIdArray=new String[]{"0712345678","0719876545","0772345678","0712345678",};
-	public static String[] nameArray=new String[]{"Pasindu","Ravindu","Kavindu","Pasindu",};
+	public static String[] orderIdArray=new String[]{};
+	public static String[] customerIdArray=new String[]{};
+	public static String[] nameArray=new String[]{};
 	public static int[] qtyArray=new int[]{2,3,2,5};
 	public static int[] orderStatusArray=new int[]{1,1,2,1};
 	
@@ -740,31 +740,40 @@ class IHungry{
 	
 	public static void updateQuantity(String orderId){
 		Scanner input=new Scanner(System.in);
-		clearConsole();
-		System.out.println("Quantity Update");
-		System.out.println("================");
-		for(int i=0; i<orderIdArray.length; i++){
+		F1:for(int i=0; i<orderIdArray.length; i++){
 			if(orderId.equalsIgnoreCase(orderIdArray[i])){
-				System.out.printf("\nOrderID       - %s\n",orderIdArray[i]);
-				System.out.printf("CustomerID    - %s\n",customerIdArray[i]);
-				System.out.printf("Name          - %s\n\n",nameArray[i]);
-				
-				L2:while(true){
-					System.out.print("Enter your quantity update value - ");
+				L1:do{
+					clearConsole();
+					System.out.println("Quantity Update");
+					System.out.println("================");
+					System.out.printf("\nOrderID       - %s\n",orderIdArray[i]);
+					System.out.printf("CustomerID    - %s\n",customerIdArray[i]);
+					System.out.printf("Name          - %s\n",nameArray[i]);
+					System.out.print("\nEnter your quantity update value - ");
 					int qty=input.nextInt();
 					if(qty>0){
 						qtyArray[i]=qty;
-						break L2;
+						System.out.println("\n\tUpdate order quantity successfully...\n");
+				
+						System.out.printf("New order quantity - %d\n",qtyArray[i]);
+						System.out.printf("New order value - %.2f\n\n",qtyArray[i]*BURGERPRICE);
+						break F1;
 					}else{
-						System.out.println("\tInvalid quantity input...Please try again...\n");
-						continue L2;
+						L2:do{
+							System.out.println("\tInvalid quantity input...!\n");
+							System.out.print("Do you want to try again? (Y/N) : ");
+							String retry=input.next().toLowerCase();
+							if(retry.equals("y")){
+								continue L1;
+							}else if(retry.equals("n")){
+								break L1;
+							}else{
+								System.out.print("\tWrong option\n\n");
+								continue L2;
+							}
+						}while(true);
 					}
-				}
-				
-				System.out.println("\n\tUpdate order quantity successfully...\n");
-				
-				System.out.printf("New order quantity - %d\n",qtyArray[i]);
-				System.out.printf("New order value - %.2f\n\n",qtyArray[i]*BURGERPRICE);
+				}while(true);
 				break;
 			}
 		}
@@ -772,31 +781,45 @@ class IHungry{
 	
 	public static void updateStatus(String orderId){
 		Scanner input=new Scanner(System.in);
-		clearConsole();
-		System.out.println("Status Update");
-		System.out.println("================");
-		for(int i=0; i<orderIdArray.length; i++){
-			if(orderId.equalsIgnoreCase(orderIdArray[i])){
-				System.out.printf("\nOrderID       - %s\n",orderIdArray[i]);
-				System.out.printf("CustomerID    - %s\n",customerIdArray[i]);
-				System.out.printf("Name          - %s\n\n",nameArray[i]);
-				
-				System.out.println("\t(0)Cancel");
-				System.out.println("\t(1)Preparing");
-				System.out.println("\t(2)Delivered");
-				
-				System.out.print("\nEnter new order status - ");
-				int newOrderId=input.nextInt();
-				while(!isOrderStatusId(newOrderId)){
-					System.out.println("\tInvalid status input...Please try again...");
+		F1:for(int i=0; i<orderIdArray.length; i++){
+			if(orderId.equalsIgnoreCase(orderIdArray[i])){				
+				L1:do{
+					clearConsole();
+					System.out.println("Status Update");
+					System.out.println("================");
+					System.out.printf("\nOrderID       - %s\n",orderIdArray[i]);
+					System.out.printf("CustomerID    - %s\n",customerIdArray[i]);
+					System.out.printf("Name          - %s\n\n",nameArray[i]);
+					
+					System.out.println("\t(0)Cancel");
+					System.out.println("\t(1)Preparing");
+					System.out.println("\t(2)Delivered");
 					System.out.print("\nEnter new order status - ");
-					newOrderId=input.nextInt();
-				}
-				orderStatusArray[i]=newOrderId;
-				
-				System.out.println("\n\tUpdate order status successfully...\n");
-				
-				System.out.printf("New order status - %s\n",getOrderStatusName(orderStatusArray[i]));
+					int newOrderId=input.nextInt();
+					if(!isOrderStatusId(newOrderId)){
+						L2:do{
+							System.out.println("\tInvalid status input...!\n");
+							System.out.print("Do you want to try again? (Y/N) : ");
+							String retry=input.next().toLowerCase();
+							if(retry.equals("y")){
+								continue L1;
+							}else if(retry.equals("n")){
+								break L1;
+							}else{
+								System.out.print("\tWrong option\n\n");
+								continue L2;
+							}
+						}while(true);
+					}else{
+						if(newOrderId==CANCEL){
+							qtyArray[i]=0;
+						}
+						orderStatusArray[i]=newOrderId;
+						System.out.println("\n\tUpdate order status successfully...\n");
+						System.out.printf("New order status - %s\n",getOrderStatusName(orderStatusArray[i]));
+						break F1;
+					}
+				}while(true);
 			}
 		}
 	}
